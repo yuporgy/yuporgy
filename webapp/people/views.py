@@ -43,5 +43,5 @@ def add():
         db.session.add(data)
         db.session.commit()
 
-        return (url_for('people.index'))
+        return redirect(url_for('people.index'))
 
