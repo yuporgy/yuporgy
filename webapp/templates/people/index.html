@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col md-12">
+            <div class="p-4 mb-4 bg-light rounded-3">
+                Вы вошли как {{current_user.username}} <a href="users/logout">Выйти</a>
+                <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#AddModal">Добавить друга</button>
+                
+            <table class="table">
+                  <thead class="table-dark">
+                    <tr>
+                      <th>Имя</th>
+                      <th>Группа</th>
+                      <th>Дата рождения</th>
+                      <th>Осталось дней</th>
+                      <th>Возраст</th>
+                      <th>Действия</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for people in peoples %}
+ 
+                    <tr>
+                      <th>{{ people.name}}</th>
+                      <th>{{ people.group_id}}</th>
+                      <th>{{ people.date_of_birth.strftime("%d %B %Y")}}</th>
+                      <th>{{ people.day_to_bd.days }}</th>
+                      <th>{{ people.age}}</th>
+                      <th><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ViewModal{{people.id}}">
+                        Подробнее
+                      </button>
+                      </th>    
+                    </tr>
+                  </tbody>
+
+                  <div class="modal fade" id="ViewModal{{people.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">{{people.name}}</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          ID пользователя: {{people.id}}<br>
+                          ID владельца: {{people.user_id}}<br>
+                          Группа: {{people.group_id}}<br>
+                          Имя: {{people.name}}<br>
+                          Дата рождения: {{people.date_of_birth.strftime("%d %B %Y")}}<br>
+                          {% if people.phone %} Телефон: {{people.phone}}<br> {% endif %}
+                          {% if people.profile %} Профиль:{{people.profile}}<br> {% endif %}
+                          {% if people.hobbies %} Хобби: {{people.hobbies}}<br> {% endif %}
+                          Напоминать за {{people.reminder_rule}} дней<br>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="modal fade" id="AddModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Добавить друга</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <form action="{{ url_for('people.add')}}" method="POST">
+                            <div class="form-group">
+                              {{ form.name.label }}
+                              {{ form.name() }}
+                          </div>
+                            <div class="form-group">
+                                {{ form.group_id.label }}
+                                {{ form.group_id() }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.date_of_birth.label }}
+                                {{ form.date_of_birth() }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.phone.label }}
+                                {{ form.phone() }}
+                             </div>
+                             <div class="form-group">
+                              {{ form.profile.label }}
+                              {{ form.profile() }}
+                            </div>
+                            <div class="form-group">
+                              {{ form.hobbies.label }}
+                              {{ form.hobbies() }}
+                            </div>
+                             <div class="form-group">
+                               {{ form.reminder_rule.label }}
+                              {{ form.reminder_rule() }}
+                             </div>
+                             <div class="form-group">
+                              {{ form.submit()}}
+                            </div>
+                        </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+ 
+                  {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div>
+    </div>            
+
+
+{% endblock %}
