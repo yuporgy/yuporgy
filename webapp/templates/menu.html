@@ -1,0 +1,16 @@
+{% with messages = get_flashed_messages() %}
+                {% if messages %}
+            <div class="alert alert-warning" role="alert">
+                {% for message in messages %}
+                    {{ message }}<br>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}   
+              </div>
+
+            <nav class="navbar navbar-expand-lg bg-light">
+                <div class="container-fluid">
+                   Вы вошли как {{current_user.username}} 
+                   <a href="../users/logout">Выйти</a>
+                </div>
+              </nav>

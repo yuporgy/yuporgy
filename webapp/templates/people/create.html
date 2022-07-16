@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% include "menu.html" %}
+
+{% block content %}
+
+<div class="row">
+<div class="col-md-2">
+</div>
+
+<div class="col-md-8">
+<div class="row">
+  <div class="col-sm-3"><a role="button" class="btn btn-link" href="/" >Назад</a></div>
+  <div class="col-sm-9">Добавить день рождения</div>
+
+  </div>
+  <form action="" method="POST">
+    <div class="mb-3 row">
+      <input type="hidden" name="id">
+      <label class="col-sm-3 " for="name">Имя</label>
+      <div class="col-sm-9">
+        <input class="form-control" id="name" name="name" required type="text">
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label class="col-sm-3 col-form-label" for="group_id">Группа</label>
+      <div class="col-sm-9">
+        <input class="form-control" id="group_id" name="group_id" required type="text">
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label class="col-sm-3 col-form-label" for="date_of_birth">День рождения</label>
+      <div class="col-sm-9">
+        <input class="form-control" id="date_of_birth" name="date_of_birth" required type="date">
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label class="col-sm-3 col-form-label" for="phone">Телефон</label>
+      <div class="col-sm-9">
+        <input class="form-control" id="phone" name="phone" type="text">
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label class="col-sm-3 col-form-label" for="profile">Профиль</label>
+      <div class="col-sm-9">
+        <input class="form-control" id="profile" name="profile" type="text">
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label class="col-sm-3 col-form-label" for="hobbies">Хобби</label>
+      <div class="col-sm-9">
+        <input class="form-control" id="hobbies" name="hobbies" type="text">
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label class="col-sm-3 col-form-label" for="reminder_rule">Напоминать за</label>
+      <div class="col-sm-9">
+        <input class="form-control" id="reminder_rule" name="reminder_rule" required type="text">
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <input class="btn btn-link" id="submit" name="submit" type="submit" value="Обновить">
+    </div>
+</form>
+</div>
+<div class="col-md-2">
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
